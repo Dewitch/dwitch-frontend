@@ -10,7 +10,7 @@ const Input: React.FC<InputProps> = ({ ...rest }) => {
     <input
       type="text"
       placeholder={rest.placeholder}
-      className={rest.className}
+      className={`${rest.className}`}
     />
   );
 };

@@ -8,7 +8,7 @@ const Navbar: React.FC = () => {
     <nav className="flex justify-around py-9">
       <div className=" ">
         <Link href="/">
-          <a className="mb-6 text-center text-5xl font-bold text-primary">
+          <a className="shadow-md-secondary mb-6 text-center text-5xl font-bold text-primary drop-shadow-[3px_3px_3px_#dc2626]">
             DWITCH&nbsp;.
           </a>
         </Link>
