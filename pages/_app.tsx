@@ -12,7 +12,7 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { publicProvider } from "wagmi/providers/public";
-import withApollo from "@utils/apolloClient";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_ID;
 
@@ -33,22 +33,29 @@ const wagmiClient = createClient({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const client = new ApolloClient({
+    uri: process.env.NEXT_PUBLIC_GRAPHQL_URL,
+    cache: new InMemoryCache(),
+  });
+
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider
-        theme={lightTheme({
-          accentColor: "#e11d48",
-          accentColorForeground: "white",
-          borderRadius: "small",
-          fontStack: "system",
-          overlayBlur: "small",
-        })}
-        chains={chains}
-      >
-        <Component {...pageProps} />
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <ApolloProvider client={client}>
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider
+          theme={lightTheme({
+            accentColor: "#e11d48",
+            accentColorForeground: "white",
+            borderRadius: "small",
+            fontStack: "system",
+            overlayBlur: "small",
+          })}
+          chains={chains}
+        >
+          <Component {...pageProps} />
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </ApolloProvider>
   );
 }
 
-export default withApollo(MyApp);
+export default MyApp;
