@@ -4,8 +4,8 @@ import Carousel from "@components/Carousel";
 import StreamCard from "@components/StreamCard";
 // import { useQuery } from "@apollo/react-hooks";
 // import TEST_QUERY from '../graphql/test.query';
-
 import { gql, useQuery } from "@apollo/client";
+import idx from "idx";
 
 const GET_STREAM_DATA = gql`
   query {
@@ -45,25 +45,44 @@ export default function Home() {
     },
   ];
 
-  const allStreams = images.map((slide, idx) => {
-    const streamId = idx + 1;
-    return (
-      <div key={idx}>
-        <StreamCard streamId={streamId} />
-      </div>
-    );
-  });
-
   const {
     loading: isLoadingStreamData,
     // error: errorStreamData,
     data: streamData,
   } = useQuery(GET_STREAM_DATA);
 
+  const streamersListing = idx(streamData, (_) => _.streamers) || [];
+  const streamsListing = idx(streamData, (_) => _.streams) || [];
+
+  const streamerAddressMapping: any = {};
+
   console.log("-=-=-=- isLoadingStreamData");
   console.log(isLoadingStreamData);
   console.log("-=-=-=- streamData");
   console.log(streamData);
+  console.log("-=-=-=- streamerAddressMapping");
+  console.log(streamerAddressMapping);
+
+  streamersListing.forEach((currentStreamer: any) => {
+    streamerAddressMapping[currentStreamer.streamerAddress] = currentStreamer;
+  });
+
+  const allStreams = streamsListing.map((currentStream: any, idx) => {
+    const streamId = idx + 1;
+    const currentStreamer =
+      streamerAddressMapping[currentStream.streamerAddress];
+
+    return (
+      <div key={idx}>
+        <StreamCard
+          streamId={streamId}
+          streamerName={currentStreamer.streamerName}
+          streamPrice={currentStream.flowRateCost}
+          socialTokenAddress={currentStreamer.socialTokenAddress}
+        />
+      </div>
+    );
+  });
 
   return (
     <Layout title="Dwitch">

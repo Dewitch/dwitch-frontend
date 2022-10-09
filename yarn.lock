@@ -4985,6 +4985,11 @@
     "statuses" "2.0.1"
     "toidentifier" "1.0.1"
 
+"idx@^2.5.6":
+  "integrity" "sha512-WFXLF7JgPytbMgelpRY46nHz5tyDcedJ76pLV+RJWdb8h33bxFq4bdZau38DhNSzk5eVniBf1K3jwfK+Lb5nYA=="
+  "resolved" "https://registry.npmjs.org/idx/-/idx-2.5.6.tgz"
+  "version" "2.5.6"
+
 "ieee754@^1.1.13", "ieee754@^1.2.1":
   "integrity" "sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA=="
   "resolved" "https://registry.npmjs.org/ieee754/-/ieee754-1.2.1.tgz"
