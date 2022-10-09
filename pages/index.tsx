@@ -8,18 +8,19 @@ import { gql, useQuery } from "@apollo/client";
 import idx from "idx";
 
 const GET_STREAM_DATA = gql`
-  query {
-    streams(first: 100) {
-      id
-      isActive
-      streamerAddress
-      flowRateCost
-    }
-    streamers(first: 100) {
-      streamerAddress
-      socialTokenAddress
-      streamerName
-    }
+  query {{
+  streams(first: 100 where: { isActive : true }) {
+    id
+    isActive
+    streamerAddress
+    flowRateCost
+  }
+  streamers(first: 100) {
+    streamerAddress
+    socialTokenAddress
+    streamerName
+  }
+}
   }
 `;
 
