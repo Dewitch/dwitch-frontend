@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Input from "@components/Input";
 import Layout from "@components/Layout";
@@ -8,34 +8,52 @@ import { useAccount } from "wagmi";
 import { ethers } from "ethers";
 import useConversation from "@hooks/useConversation";
 import { connectorsForWallets } from "@rainbow-me/rainbowkit";
+import { Player, useCreateStream, useStream } from "@livepeer/react";
+import { Livepeer } from "@components/Livepeer";
 
 const StreamDetail = () => {
   const { address: connectedAddress } = useAccount();
-  const [typedMessage, setTypedMessage] = useState<string>("");
+  const [streamName, setStreamName] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+
+  //   Simulating xmtp interaction due to technical issue during dev
+  const messagesState: string[] = [];
+
+  const {
+    mutate: createStream,
+    data: createdStream,
+    status: createStatus,
+  } = useCreateStream();
+
+  const { data: stream, status: streamStatus } = useStream({
+    streamId: createdStream?.id,
+    refetchInterval: (stream) => (!stream?.isActive ? 5000 : false),
+  });
+
+  const isLoading = useMemo(
+    () => createStatus === "loading" || streamStatus === "loading",
+    [createStatus, streamStatus]
+  );
 
   const { conversation, loading, messages, error, sendMessage } =
     useConversation(connectedAddress);
 
   //   const handleSubmit = (e: any) => {
   //     e.preventDefault();
-  //     setTypedMessage("");
+  //     setStreamName("");
   //     console.log("submitting form...");
   //   };
-
-  const handleChange = (e: any) => {
-    const mess = e.target.value;
-    setTypedMessage(mess);
-  };
 
   const handleSendMessage = async (e: any) => {
     e.preventDefault();
     // Send message
     console.log("sending message...");
-    await sendMessage(typedMessage);
-    setTypedMessage("");
+    messagesState.push(message);
+    await sendMessage(message);
+    setMessage("");
   };
 
-  console.log(typedMessage);
+  console.log(message);
   //   const getXmtpClient = async () => {
   //     // xmtp client setup
   //     const coinbaseUrl = "https://goerli.ethereum.coinbasecloud.net";
@@ -63,27 +81,21 @@ const StreamDetail = () => {
     console.log("conversation: ", conversation);
   }, [conversation, messages]);
 
-  //   console.log("conversations...: ", conversations);
-
   return (
     <Layout>
       <div className=" text-center">
         <h1 className="mb-6 text-center text-lg font-bold">Stream Detail</h1>
-        <Image
-          width={600}
-          height={400}
-          src="/images/jumanji-image.jpeg"
-          alt="Jumanji"
-          className="opacity-100 duration-300"
-        />
+
+        <Livepeer playbackId={stream?.playbackId} />
 
         <div className="mx-auto w-auto rounded-md bg-slate-700 p-9 md:w-[600px]">
           <h3 className="mb-6 text-center text-lg font-bold">Live Chat</h3>
 
           <div>
             <Input
-              placeholder={typedMessage}
-              onChange={handleChange}
+              placeholder="Send Message..."
+              onChange={(e) => setMessage(e.target.value)}
+              value={message}
               className="input w-full max-w-xs rounded-md bg-gray-800 text-white"
             />
             <Button label="Send" onClick={handleSendMessage} />

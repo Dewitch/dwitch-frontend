@@ -7,6 +7,7 @@ type ButtonProps = {
   outline?: boolean;
   primary?: boolean;
   secondary?: boolean;
+  disabled?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({ ...rest }) => {

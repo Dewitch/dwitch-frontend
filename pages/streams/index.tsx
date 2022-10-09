@@ -1,13 +1,16 @@
 import Input from "@components/Input";
 import Layout from "@components/Layout";
 import Button from "@components/Button";
-import React, { useState } from "react";
+
 import {
   useAccount,
   useContractWrite,
   usePrepareContractWrite,
   useWaitForTransaction,
 } from "wagmi";
+
+import React, { useMemo, useState } from "react";
+import { useCreateStream, useStream } from "@livepeer/react";
 
 import streamControllerAbi from "../../context/abis/streamController.abi";
 import { gql, useQuery } from "@apollo/client";
@@ -49,12 +52,20 @@ const CreateStream = () => {
   console.log("--- streamerAddressMapping");
   console.log(streamerAddressMapping);
 
+  const [streamName, setStreamName] = useState<string>("");
+  const [price, setPrice] = useState<string | number>("");
+
+  const {
+    mutate: createStream,
+    data: createdStream,
+    status: createStatus,
+  } = useCreateStream();
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     console.log("submitting form...");
   };
 
-  const [streamName, setStreamName] = useState("");
   const [streamId, setStreamId] = useState("");
   const [perSecondStreamRate, setPerSecondStreamRate] = useState("");
 

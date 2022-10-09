@@ -4,6 +4,7 @@ type InputProps = {
   placeholder: string;
   className?: string;
   onChange?: (arg: any) => void;
+  value?: string | number;
 };
 
 const Input: React.FC<InputProps> = ({ ...rest }) => {
@@ -13,6 +14,7 @@ const Input: React.FC<InputProps> = ({ ...rest }) => {
       placeholder={rest.placeholder}
       className={`${rest.className}`}
       onChange={rest.onChange}
+      value={rest.value}
     />
   );
 };

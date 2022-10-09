@@ -13,6 +13,13 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { publicProvider } from "wagmi/providers/public";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { Livepeer } from "@components/Livepeer";
+import {
+  LivepeerConfig,
+  ThemeConfig,
+  createReactClient,
+  studioProvider,
+} from "@livepeer/react";
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_ID;
 
@@ -31,6 +38,20 @@ const wagmiClient = createClient({
   connectors,
   provider,
 });
+
+const livePeerClient = createReactClient({
+  provider: studioProvider({ apiKey: process.env.NEXT_PUBLIC_LIVEPEER_KEY }),
+});
+
+const livepeerTheme: ThemeConfig = {
+  colors: {
+    accent: "rgb(0, 145, 255)",
+    containerBorderColor: "rgba(0, 145, 255, 0.9)",
+  },
+  fonts: {
+    display: "Inter",
+  },
+};
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
@@ -51,7 +72,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           })}
           chains={chains}
         >
-          <Component {...pageProps} />
+          <LivepeerConfig client={livePeerClient} theme={livepeerTheme}>
+            <Component {...pageProps} />
+          </LivepeerConfig>
         </RainbowKitProvider>
       </WagmiConfig>
     </ApolloProvider>
