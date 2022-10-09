@@ -1,6 +1,7 @@
 import Layout from "components/Layout";
 import Image from "next/image";
 import Carousel from "@components/Carousel";
+import StreamCard from "@components/StreamCard";
 
 export default function Home() {
   let slideItems = [
@@ -31,11 +32,36 @@ export default function Home() {
   });
 
   return (
-    <Layout title="Home | NowFT">
-      <div>
-        <h2>Hello!</h2>
+    <Layout title="Dwitch">
+      <div className="flex justify-center pt-24 pb-6">
+        <Carousel />
       </div>
-      <Carousel />
+
+      <h2 className="pt-16 pl-24 text-lg text-white">All Streams</h2>
+      <div className="flex justify-around pt-6 pb-32">
+        <div>
+          <StreamCard />
+        </div>
+        <div>
+          <StreamCard />
+        </div>
+        <div>
+          <StreamCard />
+        </div>
+      </div>
+
+      {/* <div>More content</div>
+      <div>More content</div>
+      <div>More content</div>
+      <div>More content</div>
+      <div>More content</div>
+      <div>More content</div>
+      <div>More content</div>
+      <div>More content</div>
+      <div>More content</div>
+      <div>More content</div>
+      <div>More content</div>
+      <div>More content</div> */}
     </Layout>
   );
 }

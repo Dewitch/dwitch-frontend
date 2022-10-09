@@ -10,7 +10,7 @@ type LayoutProps = {
 };
 
 const Layout = ({ children, title = "Default title" }: LayoutProps) => (
-  <div className="flex h-screen flex-col bg-gradient-to-b from-gray-900 to-slate-800">
+  <div className="flex h-full flex-col bg-gradient-to-b from-gray-900 to-slate-800 ">
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
@@ -23,9 +23,7 @@ const Layout = ({ children, title = "Default title" }: LayoutProps) => (
       options={{ showSpinner: false }}
     />
     <Navbar />
-    <main className="font-satoshi bg-gradientbg min-h-screen bg-cover bg-repeat-y text-white">
-      {children}
-    </main>
+    <main className="font-satoshi text-white">{children}</main>
   </div>
 );
 
