@@ -2,6 +2,7 @@ import React from "react";
 import Input from "components/Input";
 import Button from "@components/Button";
 import Link from "next/link";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const Navbar: React.FC = () => {
   return (
@@ -35,11 +36,12 @@ const Navbar: React.FC = () => {
           className="input w-full max-w-xs rounded-md bg-gray-800 text-white"
         />
       </div>
-      <Button
+      {/* <Button
         label="Connect Wallet"
         primary
         onClick={() => alert("clicked!")}
-      />
+      /> */}
+      <ConnectButton />
     </nav>
   );
 };
