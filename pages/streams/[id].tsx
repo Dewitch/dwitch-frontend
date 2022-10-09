@@ -4,7 +4,10 @@ import Button from "@components/Button";
 import React from "react";
 
 const StreamDetail = () => {
-  const handleSubmit = () => console.log("submitting form...");
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    console.log("submitting form...");
+  };
 
   return (
     <Layout>
