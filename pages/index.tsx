@@ -2,8 +2,13 @@ import Layout from "components/Layout";
 import Image from "next/image";
 import Carousel from "@components/Carousel";
 import StreamCard from "@components/StreamCard";
+import { useQuery } from "@apollo/react-hooks";
+// import TEST_QUERY from '../graphql/test.query';
 
 export default function Home() {
+  // TODO: create a query and update it here
+  // Create a query hook
+  // const { data, loading, error } = useQuery(TEST_QUERY);
   const images = [
     {
       id: 0,

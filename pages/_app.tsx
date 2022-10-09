@@ -12,15 +12,13 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { publicProvider } from "wagmi/providers/public";
+import withApollo from "@utils/apolloClient";
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_ID;
 
 const { chains, provider } = configureChains(
   [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum, chain.goerli],
-  [
-    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
-    publicProvider(),
-  ]
+  [alchemyProvider({ apiKey: alchemyKey }), publicProvider()]
 );
 
 const { connectors } = getDefaultWallets({
@@ -53,4 +51,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default withApollo(MyApp);
