@@ -25,7 +25,7 @@ const ManageStreamer = () => {
     contractInterface: streamControllerAbi,
     functionName: "registerAsStreamer",
     args: [nameField, socialTokenNameField, socialTokenSymbolField],
-    enabled: false,
+    // enabled: false,
     onSuccess(data) {
       console.log("Success", data);
     },
@@ -48,6 +48,10 @@ const ManageStreamer = () => {
 
     console.log("-=-=- socialTokenSymbolField");
     console.log(socialTokenSymbolField);
+    console.log("-=-=- write");
+    console.log(write);
+    console.log("-=-=- data");
+    console.log(data);
 
     if (write) {
       write();

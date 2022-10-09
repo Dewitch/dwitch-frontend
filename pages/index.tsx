@@ -67,16 +67,17 @@ export default function Home() {
     streamerAddressMapping[currentStreamer.streamerAddress] = currentStreamer;
   });
 
-  const allStreams = streamsListing.map((currentStream: any, idx) => {
-    const streamId = idx + 1;
+  const allStreams = streamsListing.map((currentStream: any, index: number) => {
+    const streamId = index + 1;
     const currentStreamer =
       streamerAddressMapping[currentStream.streamerAddress];
 
     return (
-      <div key={idx}>
+      <div key={index}>
         <StreamCard
           streamId={streamId}
           streamerName={currentStreamer.streamerName}
+          streamerAddress={currentStreamer.streamerAddress}
           streamPrice={currentStream.flowRateCost}
           socialTokenAddress={currentStreamer.socialTokenAddress}
         />
