@@ -10,7 +10,7 @@ type LayoutProps = {
 };
 
 const Layout = ({ children, title = "Default title" }: LayoutProps) => (
-  <div className="flex h-full flex-col bg-gradient-to-b from-gray-900 to-slate-800 ">
+  <div className="flex h-full flex-col ">
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />

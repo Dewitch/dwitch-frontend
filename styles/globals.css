@@ -17,3 +17,8 @@
   font-display: auto;
   src: url(/fonts/Satoshi-VariableItalic.woff2) format("woff2");
 }
+
+html {
+  background-image: linear-gradient(to bottom, #111827, #2d4060);
+  min-height: 100%;
+}
