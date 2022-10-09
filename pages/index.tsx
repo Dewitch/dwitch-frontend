@@ -4,30 +4,30 @@ import Carousel from "@components/Carousel";
 import StreamCard from "@components/StreamCard";
 
 export default function Home() {
-  let slideItems = [
+  const images = [
     {
-      url: "https://picsum.photos/800/300/?random",
-      idx: 1,
+      id: 0,
+      url: "/images/jumanji-image.jpeg",
+      name: "fortnite",
     },
     {
-      url: "https://picsum.photos/800/301/?random",
-      idx: 2,
+      id: 1,
+      url: "/images/jumanji-image.jpeg",
+      name: "jumanji",
     },
     {
-      url: "https://picsum.photos/800/302/?random",
-      idx: 3,
+      id: 2,
+      url: "/images/jumanji-image.jpeg",
+      name: "jumanji",
     },
   ];
 
-  const slides = slideItems.map((slide, idx) => {
+  const allStreams = images.map((slide, idx) => {
+    const streamId = idx + 1;
     return (
-      <Image
-        src={slide.url}
-        key={idx}
-        width={120}
-        height={120}
-        alt="carousel image"
-      />
+      <div key={idx}>
+        <StreamCard streamId={streamId} />
+      </div>
     );
   });
 
@@ -37,34 +37,11 @@ export default function Home() {
         Featured Streams
       </h2>
       <div className="flex justify-center pt-24 pb-6">
-        <Carousel />
+        <Carousel slides={images} />
       </div>
 
       <h2 className="pt-16 pl-24 text-lg font-bold text-white">All Streams</h2>
-      <div className="flex justify-around pt-6 pb-32">
-        <div>
-          <StreamCard />
-        </div>
-        <div>
-          <StreamCard />
-        </div>
-        <div>
-          <StreamCard />
-        </div>
-      </div>
-
-      {/* <div>More content</div>
-      <div>More content</div>
-      <div>More content</div>
-      <div>More content</div>
-      <div>More content</div>
-      <div>More content</div>
-      <div>More content</div>
-      <div>More content</div>
-      <div>More content</div>
-      <div>More content</div>
-      <div>More content</div>
-      <div>More content</div> */}
+      <div className="flex justify-around pt-6 pb-32">{allStreams}</div>
     </Layout>
   );
 }

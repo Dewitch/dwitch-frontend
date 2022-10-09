@@ -5,30 +5,13 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 interface CarouselProps {
   imageIndex?: number;
+  slides: object[];
 }
 
-const Carousel: React.FC<CarouselProps> = ({ imageIndex }) => {
+const Carousel: React.FC<CarouselProps> = ({ imageIndex, slides }) => {
   const [currentImage, setCurrentImage] = useState<number>(0);
 
-  const imagesToCycle = [
-    {
-      id: 0,
-      url: "/images/jumanji-image.jpeg",
-      name: "fortnite",
-    },
-    {
-      id: 1,
-      url: "/images/jumanji-image.jpeg",
-      name: "jumanji",
-    },
-    {
-      id: 2,
-      url: "/images/jumanji-image.jpeg",
-      name: "jumanji",
-    },
-  ];
-
-  const length = imagesToCycle.length;
+  const length = slides.length;
 
   const incrementImageNum = (): void => {
     setCurrentImage(currentImage === length - 1 ? 0 : currentImage + 1);
@@ -40,7 +23,7 @@ const Carousel: React.FC<CarouselProps> = ({ imageIndex }) => {
 
   return (
     <>
-      {imagesToCycle.map((img, index) => {
+      {slides.map((img, index) => {
         return (
           <div
             className={
