@@ -3,7 +3,7 @@ import Layout from "@components/Layout";
 import Button from "@components/Button";
 import React from "react";
 
-const StreamDetail = () => {
+const CreateStream = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     console.log("submitting form...");
@@ -34,4 +34,4 @@ const StreamDetail = () => {
   );
 };
 
-export default StreamDetail;
+export default CreateStream;

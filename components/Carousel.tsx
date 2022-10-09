@@ -5,7 +5,7 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 interface CarouselProps {
   imageIndex?: number;
-  slides: object[];
+  slides: any[];
 }
 
 const Carousel: React.FC<CarouselProps> = ({ imageIndex, slides }) => {
