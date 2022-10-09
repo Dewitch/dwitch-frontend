@@ -12,6 +12,8 @@
     "@emotion/core": "^11.0.0",
     "@headlessui/react": "^1.7.3",
     "@rainbow-me/rainbowkit": "^0.7.1",
+    "@xmtp/xmtp-js": "^6.8.0",
+    "axios": "^1.1.2",
     "ethers": "^5.7.1",
     "next": "^12.1.6",
     "nextjs-progressbar": "^0.0.14",

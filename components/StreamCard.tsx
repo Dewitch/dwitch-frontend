@@ -19,6 +19,7 @@ const StreamCard = ({ streamId = 1 }) => {
       <div className="mt-3 mb-6">
         <p className="font-semibold text-white">Streamer: John Doe</p>
         <p className="font-semibold text-white">Title: Jumanji</p>
+        <p className="font-semibold text-white">Price: 0.02 ETH</p>
       </div>
       <div className="flex justify-between">
         <Button
