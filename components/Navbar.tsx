@@ -25,14 +25,14 @@ const Navbar: React.FC = () => {
         <div className="mx-6">
           <Link href="/streamer">
             <a className="text-md mb-6 text-center font-bold text-white hover:text-primary">
-              Streamer
+              Streamer Toolbox
             </a>
           </Link>
         </div>
         <div>
           <Link href="/streams">
             <a className="text-md mb-6 text-center font-bold text-white hover:text-primary">
-              Create Streams
+              Stream Manager
             </a>
           </Link>
         </div>
