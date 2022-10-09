@@ -115,12 +115,26 @@ const StreamerApproveButton = ({}) => {
 
   if (socialTokenAddress) {
     return (
-      <Button
-        primary
-        label="Approve Social Token"
-        onClick={handleSubscribe}
-        className="mr-3 flex-1 border-primary text-white hover:bg-primary"
-      />
+      <div className="text-center">
+        <div className="my-6">
+          <Button
+            primary
+            label="Approve Social Token"
+            onClick={handleSubscribe}
+            className="mr-3 flex-1 border-primary text-white hover:bg-primary"
+          />
+        </div>
+        <div className="my-6">
+          <a
+            rel="noopener noreferrer"
+            href={`https://goerli.etherscan.io/address/${socialTokenAddress}`}
+            target="_blank"
+            className="text-md mb-6 text-center font-bold text-white hover:text-primary"
+          >
+            See Token
+          </a>
+        </div>
+      </div>
     );
   }
 

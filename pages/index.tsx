@@ -87,15 +87,17 @@ export default function Home() {
 
   return (
     <Layout title="Dwitch">
-      <h2 className="pt-16 pl-24 text-lg font-bold text-white">
+      {/* <h2 className="pt-16 pl-24 text-lg font-bold text-white">
         Featured Streams
       </h2>
       <div className="flex justify-center pt-24 pb-6">
         <Carousel slides={images} />
-      </div>
+      </div> */}
 
       <h2 className="pt-16 pl-24 text-lg font-bold text-white">All Streams</h2>
-      <div className="flex justify-around pt-6 pb-32">{allStreams}</div>
+      <div className="flex justify-around pt-6 pb-32">
+        {allStreams.length === 0 ? "No active streams" : allStreams}
+      </div>
     </Layout>
   );
 }
