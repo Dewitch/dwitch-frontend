@@ -8,13 +8,12 @@ import {
   Theme,
   lightTheme,
 } from "@rainbow-me/rainbowkit";
-import { chain, createClient, WagmiConfig } from "wagmi";
-import ethers from "ethers";
+import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { ethers } from "ethers";
 
-// import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
-// import { alchemyProvider } from "wagmi/providers/alchemy";
-// import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
-// import { publicProvider } from "wagmi/providers/public";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
+import { publicProvider } from "wagmi/providers/public";
 
 // const { chains, provider } = configureChains(
 //   [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum, chain.goerli],
@@ -31,20 +30,18 @@ import ethers from "ethers";
 // );
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const chains = [
-    chain.mainnet,
-    chain.polygon,
-    chain.optimism,
-    chain.arbitrum,
-    chain.goerli,
-  ];
+  // const chains = [
+  //   chain.mainnet,
+  //   chain.polygon,
+  //   chain.optimism,
+  //   chain.arbitrum,
+  //   chain.goerli,
+  // ];
 
   // Import environment variables
   const baseUrl = process.env.NODE_ENDPOINT || "";
   const username = process.env.NODE_USERNAME || "";
   const password = process.env.NODE_PASSWORD || "";
-  console.log("ethers");
-  console.log(ethers);
 
   // Create node provider using project credentials
   const provider = new ethers.providers.JsonRpcProvider({
@@ -52,6 +49,22 @@ function MyApp({ Component, pageProps }: AppProps) {
     user: username,
     password: password,
   });
+  console.log("*** *** *** *** ***");
+  console.log("*** *** *** *** *** provider");
+  console.log(provider);
+
+  const { chains } = configureChains(
+    [chain.goerli],
+    // [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
+    // [() => provider]
+    [
+      (chain) => ({
+        chain,
+        provider: () => provider,
+      }),
+      publicProvider(),
+    ]
+  );
 
   const { connectors } = getDefaultWallets({
     appName: "Dwitch",
