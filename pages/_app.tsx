@@ -13,16 +13,13 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { publicProvider } from "wagmi/providers/public";
 
+const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_ID;
+
 const { chains, provider } = configureChains(
   [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum, chain.goerli],
-  // [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
   [
-    jsonRpcProvider({
-      rpc: (chain) => ({
-        // http: `https://${chain.id}.example.com`,
-        http: `https://goerli.ethereum.coinbasecloud.net`,
-      }),
-    }),
+    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
+    publicProvider(),
   ]
 );
 
