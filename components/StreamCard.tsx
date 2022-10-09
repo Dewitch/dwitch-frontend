@@ -1,8 +1,10 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Button from "@components/Button";
 
-const StreamCard = () => {
+// TODO: kill default streadId
+const StreamCard = ({ streamId = 1 }) => {
   return (
     <>
       <div>
@@ -25,12 +27,17 @@ const StreamCard = () => {
           outline
           className="mr-3 flex-1 border-primary text-primary hover:bg-primary"
         />
-        <Button
+        {/* <Button
           label="Subscribe"
           onClick={() => console.log("subscribed!")}
           primary
           className="flex-1 border-primary text-white hover:bg-primary"
-        />
+        /> */}
+        <Link href={`/streams/${streamId}`}>
+          <a className="btn btn-primary flex-1 border-primary text-white hover:bg-primary">
+            Subscribe
+          </a>
+        </Link>
       </div>
     </>
   );

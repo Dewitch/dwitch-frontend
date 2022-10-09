@@ -10,16 +10,27 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
+import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, provider } = configureChains(
-  [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
-  [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
+  [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum, chain.goerli],
+  // [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
+  [
+    jsonRpcProvider({
+      rpc: (chain) => ({
+        // http: `https://${chain.id}.example.com`,
+        http: `https://goerli.ethereum.coinbasecloud.net`,
+      }),
+    }),
+  ]
 );
+
 const { connectors } = getDefaultWallets({
   appName: "Dwitch",
   chains,
 });
+
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,

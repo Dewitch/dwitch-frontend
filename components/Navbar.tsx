@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
         <div>
-          <Link href="/streams/1">
+          <Link href="/streams">
             <a className="text-md mb-6 text-center font-bold text-white hover:text-primary">
               Streams
             </a>
