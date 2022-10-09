@@ -4,7 +4,7 @@ import Carousel from "@components/Carousel";
 import StreamCard from "@components/StreamCard";
 import { gql, useQuery } from "@apollo/client";
 import idx from "idx";
-import axios from "axios";
+
 import { useEffect, useState } from "react";
 
 const GET_STREAM_DATA = gql`
@@ -55,17 +55,22 @@ export default function Home() {
         ],
       };
 
-      const config = {
+      fetch("https://livepeer.studio/api/stream", {
+        method: "POST",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_LIVEPEER_KEY}`,
         },
-      };
-
-      await axios
-        .post("https://livepeer.studio/api/stream", data, config)
-        .then((response) => {
-          console.log({ response });
-          setStream(response.data);
+        body: JSON.stringify(data),
+      })
+        .then((resp) => {
+          const data = resp.json();
+          console.log("data: ", data);
+          return data;
+        })
+        .then((data) => {
+          // @ts-ignore
+          setStream(data);
         })
         .catch((error) => console.log("error: ", error));
     };
