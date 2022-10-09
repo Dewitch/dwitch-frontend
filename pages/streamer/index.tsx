@@ -3,10 +3,38 @@ import Layout from "@components/Layout";
 import Button from "@components/Button";
 import React, { useState } from "react";
 
+import streamControllerAbi from "../../context/abis/streamController.abi";
+
+import {
+  usePrepareContractWrite,
+  useContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
+
 const ManageStreamer = () => {
   const [nameField, setNameField] = useState("");
   const [socialTokenNameField, setSocialTokenNameField] = useState("");
   const [socialTokenSymbolField, setSocialTokenSymbolField] = useState("");
+  const [transactionData, setTransactionData] = useState(null);
+
+  console.log("-=-=- transactionData");
+  console.log(transactionData);
+
+  const { config } = usePrepareContractWrite({
+    addressOrName: process.env.NEXT_PUBLIC_STREAM_CONTROLLER_ADDR || "",
+    contractInterface: streamControllerAbi,
+    functionName: "registerAsStreamer",
+    args: [nameField, socialTokenNameField, socialTokenSymbolField],
+    enabled: false,
+    onSuccess(data) {
+      console.log("Success", data);
+    },
+  });
+  const { data, write } = useContractWrite(config);
+
+  const { isLoading, isSuccess } = useWaitForTransaction({
+    hash: data?.hash,
+  });
 
   const handleRegisterClick = (e: any) => {
     e.preventDefault();
@@ -20,6 +48,10 @@ const ManageStreamer = () => {
 
     console.log("-=-=- socialTokenSymbolField");
     console.log(socialTokenSymbolField);
+
+    if (write) {
+      write();
+    }
   };
 
   const handleTextChange = (textUpdater: any) => (e: any) =>
