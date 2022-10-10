@@ -91,11 +91,22 @@ const CreateStream = () => {
     console.log("-=-=- write");
     console.log(write);
     console.log("-=-=- data");
-    console.log(data);
+    // console.log(data);
+    console.log("creating stream...");
+
+    // try {
+    //   createStream({
+    //     name: streamName,
+    //   });
+    // } catch (error) {
+    //   console.log("***********createStream error*********: ", error);
+    // }
 
     if (write) {
       write();
     }
+    setStreamName("");
+    setPerSecondStreamRate("");
   };
   const handleTextChange = (textUpdater: any) => (e: any) =>
     textUpdater(e.target.value);
@@ -150,6 +161,7 @@ const CreateStream = () => {
               primary
               className="w-full"
               onClick={handleRegisterClick}
+              disabled={!streamName}
             />
           </div>
         )}

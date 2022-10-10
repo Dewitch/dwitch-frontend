@@ -13,7 +13,7 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { publicProvider } from "wagmi/providers/public";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { Livepeer } from "@components/Livepeer";
+
 import {
   LivepeerConfig,
   ThemeConfig,
