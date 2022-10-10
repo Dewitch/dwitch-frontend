@@ -6,6 +6,7 @@ import { gql, useQuery } from "@apollo/client";
 import idx from "idx";
 
 import { useEffect, useState } from "react";
+import { Livepeer } from "@components/Livepeer";
 
 const GET_STREAM_DATA = gql`
   query {
@@ -149,6 +150,8 @@ export default function Home() {
       <h2 className="pt-16 pl-24 text-lg font-bold text-white">All Streams</h2>
       <div className="flex justify-around pt-6 pb-32">
         {allStreams.length === 0 ? "No active streams" : allStreams}
+        {/* TODO: insert this dynamically */}
+        <Livepeer playbackId="5ccfv4r7wqtv1svy" />
       </div>
     </Layout>
   );

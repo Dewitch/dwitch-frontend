@@ -22,7 +22,7 @@ export function Livepeer({ playbackId, ...rest }) {
   return (
     <Player
       title="Jumanji"
-      playbackId={playbackId}
+      playbackId="5ccfv4r7wqtv1svy"
       loop
       autoPlay
       showTitle={false}
